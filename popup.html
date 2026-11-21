@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Speedwatch</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main>
+    <section class="hero" id="hero">
+      <header class="topbar">
+        <div class="brand">
+          <img src="icons/icon48.png" alt="" width="22" height="22" />
+          <span>Speedwatch</span>
+        </div>
+        <span class="live" id="live"><span class="live-dot"></span><span id="live-label">Live</span></span>
+      </header>
+
+      <div class="readout">
+        <div class="num-row">
+          <div class="num"><span id="usage">–</span><span class="unit" id="usage-unit">KB/s</span></div>
+          <span class="when">Current usage</span>
+        </div>
+        <p class="verdict" id="verdict">Waiting for usage data.</p>
+      </div>
+
+      <div class="sec">
+        <span>Speed checks, last 2 hours</span>
+        <strong id="sec-val">–</strong>
+      </div>
+
+      <div class="chart" id="chart">
+        <svg id="svg" viewBox="0 0 348 84" width="348" height="84" role="img"
+             aria-label="Speed of each check over the last 2 hours">
+          <g id="plot"></g>
+          <rect id="hv-bar" y="8" height="58" style="display:none" />
+          <rect id="hit" x="0" y="0" width="348" height="84" fill="transparent" />
+        </svg>
+        <div class="tip" id="tip" hidden>
+          <strong id="tip-val"></strong>
+          <span id="tip-time"></span>
+        </div>
+      </div>
+    </section>
+
+    <dl class="stats">
+      <div><dt>Average</dt><dd id="s-avg">–</dd></div>
+      <div><dt>Peak</dt><dd id="s-max">–</dd></div>
+      <div><dt>Lowest</dt><dd id="s-min">–</dd></div>
+      <div><dt>Ping</dt><dd id="s-ping">–</dd></div>
+    </dl>
+
+    <section class="schedule">
+      <div class="slot">
+        <span class="k">Last check</span>
+        <span class="v" id="last-time">–</span>
+        <span class="sub" id="last-ago"></span>
+      </div>
+      <div class="slot">
+        <span class="k">Next check</span>
+        <span class="v" id="next-time">–</span>
+        <span class="sub" id="next-in"></span>
+      </div>
+      <button class="test" id="test" type="button">Test now</button>
+      <div class="track" aria-hidden="true"><div class="track-fill" id="track"></div></div>
+
+      <form class="interval" id="interval" novalidate>
+        <label for="minutes">Check speed every</label>
+        <input id="minutes" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+               autocomplete="off" aria-describedby="msg" />
+        <span class="min">minutes</span>
+        <button class="save" type="submit">Save</button>
+      </form>
+      <p class="msg" id="msg" role="status"></p>
+    </section>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
